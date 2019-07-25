@@ -147,4 +147,24 @@ router.get('/', function(req, res, next) {
 module.exports = router;
 ```
 
+There are two routes in `app.js` .
+
+`/` is handled by `routes/index.js`
+`/fibonacci` is handled by `routes/fibonacci.js`
+
+
+The `res.render` function renders the name template using the provided data values and emits the result as an HTTP response.
+
+The `views/fibonacci.hbs` template contains a form in which the user enters a number.
+Because it is a `GET` form, when the user clicks on the Submit button, the browser will issue an HTTP `GET` on the `/fibonacci` URL.
+
+What distinquishes one `GET` on `/fibonacci` from another is whether the URL contains a query parameter named `fibonum`.
+
+When the user first enters the route `/fibonacci`, there is no `fibonum`, nothing to calculate.
+
+After the user has entered a number and clicked on the Submit, there is a `fibonum` and something to calculate.
+
+Express automatically parses the query parameters, making them available as `req.query`. 
+
+`routes/fibonacci.js` can check whether there is a `fibonum`. If there is, it calls the `fibonacci` function to calculate the value.
 
