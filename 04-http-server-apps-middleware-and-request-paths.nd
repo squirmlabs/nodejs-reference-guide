@@ -1,0 +1,28 @@
+## Middleware and request paths
+
+We've seen 2 kinds of middleware functions so far. In one, the first argument is the handler function. In the other, the first argument is a string containing a URL snippet, and the second argument is the handler function.
+
+What makes this possible is how `app.use` has an optional first argument.
+
+The path the middleware is mounted on is an optional argument.
+
+The `path` is a pattern match against the request URL, and the given function is triggered if the URL matches the pattern. 
+
+There's even a method to supply named parameters in the URL.
+
+In this example, we're suggesting a user profile service, and that for this URL we want to display information about the named user.
+
+```js
+app.use('/user/profile/:id`, function(req, res, next) {
+  userProfiles.loolkup(req.params.id, (err, profile) => {
+    if(err) return next(err);
+    // do something with the profile
+    // Such as display it to the user
+    res.send(profile.display());
+  });
+});
+```
+
+This path specification has a pattern, :id, and the value will land in req.params.id.
+
+
