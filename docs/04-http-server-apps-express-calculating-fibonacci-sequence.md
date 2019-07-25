@@ -97,5 +97,20 @@ Will serve as a navigation bar that's included on every page.
 
 Files in `views` are templates into which data is rendered. They serve the View aspect of the `Model-View-Controller` paradigm.
 
+Delete `routes/users.js`.
 
+In `routes/index.js` change the fouter function to the following:
+
+```js
+const express = require('express');
+const router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { title: 'Fibonacci' });
+});
+
+module.exports = router;
+
+```
 
