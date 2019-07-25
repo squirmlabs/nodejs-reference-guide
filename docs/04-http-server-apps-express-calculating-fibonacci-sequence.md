@@ -97,7 +97,11 @@ Will serve as a navigation bar that's included on every page.
 
 Files in `views` are templates into which data is rendered. They serve the View aspect of the `Model-View-Controller` paradigm.
 
+## Routes - users.js
+
 Delete `routes/users.js`.
+
+## Routes - index.js
 
 In `routes/index.js` change the fouter function to the following:
 
@@ -113,4 +117,34 @@ router.get('/', function(req, res, next) {
 module.exports = router;
 
 ```
+
+This anonymous object passed to `res.render` contains the data values we provide to the layout and view templates.
+
+
+## Routes - fibonacci.js
+
+```js
+const express = require('express');
+const router = express.Router();
+
+const math = require('../math');
+
+router.get('/', function(req, res, next) {
+  if (req.query.fibonum) {
+    res.render('fibonacci', {
+      title: 'Calculate Fibonacci numbers',
+      fibonum: req.query.fibonum,
+      fiboval: math.fibonacci(req.query.fibonum)
+    });
+  } else {
+    res.render('fibonacci', {
+      title: 'Calculate Fibonacci numbers',
+      fiboval: undefined
+    });
+  }
+});
+
+module.exports = router;
+```
+
 
